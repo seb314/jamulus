@@ -311,6 +311,19 @@ DISTFILES_OBOE += libs/oboe/AUTHORS \
     BINDIR = $$absolute_path($$BINDIR, $$PREFIX)
     INSTALLS += target
     target.path = $$BINDIR
+
+    isEmpty(DATADIR) {
+        DATADIR = share
+    }
+    DATADIR = $$absolute_path($$DATADIR, $$PREFIX)
+    ICONDIR = $$DATADIR/icons/hicolor/48x48/apps # https://specifications.freedesktop.org/icon-theme-spec/icon-theme-spec-latest.html#install_icons
+    DESKTOPDIR = $$DATADIR/applications
+    icon_target.files = src/res/fronticon.png
+    icon_target.path = $$ICONDIR
+    INSTALLS += icon_target
+    desktop_file_target.files = distributions/jamulus.desktop
+    desktop_file_target.path = $$DESKTOPDIR
+    INSTALLS += desktop_file_target
 }
 
 RCC_DIR = src/res
